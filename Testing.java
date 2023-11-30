@@ -4,14 +4,16 @@ import java.net.SocketTimeoutException;
 public class Testing {
 
     public static int ans = 7;
+    public static double budgetPerMonth = 10;
+    public double priceOfGasforMon = 2;
 
     public Testing() {
         int wantedT = 23;
         int currentT = 18;
         boolean start = precheck(wantedT, currentT);
         int missing = missingTemp(wantedT, currentT, start);
-        calculations(missing);
-        posornot(ans, start);
+        double hoursNeeded = calculations(missing);
+        enoughMoney(budgetPerMonth, hoursNeeded, priceOfGasforMon);
     }
 
     public boolean precheck(int wantedT, int currentT) {
@@ -32,36 +34,34 @@ public class Testing {
         } else {
             return 0;
         }
-
     }
 
     public double calculations(int missing) {
         if (missing == 0) {
             System.out.println("Temp is hot enough (no heating needed)");
+            return 0;
         } else {
             double fortyfivers = (missing - 1);
             double mutipliedforty = (fortyfivers * 0.75);
             double total = mutipliedforty + 1;
             System.out.println("total: " + total);
-        }
-        return 0;
-    }
-
-    public boolean posornot(int a, boolean yes) {
-        if (yes == true) {
-            boolean outp = false;
-            if (a > 0) {
-                outp = true;
-                System.out.println("its possible");
-            } else {
-                System.out.println(
-                        "your budget is not enough to heat house to this temperature, lower required temp or increase budget");
-            }
-            return outp;
-        } else {
-            System.out.println("temp is already heated");
-            return yes;
+            return total;
         }
     }
 
+    public double enoughMoney(double monthlyBudget, double neededUnits, double priceOfGasforMon) {
+        double weeklyBudget = monthlyBudget / 4;
+        double totalCost = neededUnits * priceOfGasforMon;
+        System.out.println("weekly " + weeklyBudget);
+        System.out.println("total Cost: " + totalCost);
+        double weeklyCost = totalCost / 4;
+        double net = monthlyBudget - totalCost;
+        if (net > 0) {
+            System.out.println("u can afford to heat to this temperature" + "left over budget = " + net);
+
+        } else if (net <= 0) {
+            System.out.println("you dont have enough sorry, please lower temp or increase budget");
+        }
+        return net;
+    }
 }
