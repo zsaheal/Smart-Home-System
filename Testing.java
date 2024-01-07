@@ -64,4 +64,9 @@ public class Testing {
         }
         return net;
     }
+
+    public double getWeeklyGasAmount(double monthlyBudget, double priceOfGasforMon) {
+        double weeklyBudget = monthlyBudget / 4;
+
+    }
 }
