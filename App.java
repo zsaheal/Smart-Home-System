@@ -5,7 +5,11 @@ import java.util.Scanner;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        Testing Testing1 = new Testing();
+
+        House testerHouse = new House();
+        int insulationScore = testerHouse.getInsulationScore();
+        // Testing Testing1 = new Testing(insulationScore);
+
         // visual crossing api
         // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=UUTDGXUEZFXQCMJ79SP9ZAKDD
         URL url = new URL(
@@ -13,7 +17,6 @@ public class App {
         HttpURLConnection connecti = (HttpURLConnection) url.openConnection();
         connecti.setRequestMethod("GET");
         connecti.connect();
-        System.out.println("got here");
 
         int responseCode = connecti.getResponseCode();
 
@@ -27,7 +30,9 @@ public class App {
                 gottenInfoString.append(scanner.nextLine());
             }
             scanner.close();
-            System.out.println("infor: " + gottenInfoString);
+            System.out.println("info: " + gottenInfoString);
         }
+
+        Testing Testing2 = new Testing(insulationScore);
     }
 }

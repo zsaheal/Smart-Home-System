@@ -6,8 +6,10 @@ public class Testing {
     public static int ans = 7;
     public static double budgetPerMonth = 10;
     public double priceOfGasforMon = 2;
+    public int houseInsulation = 0;
 
-    public Testing() {
+    public Testing(int insulationScore) {
+        houseInsulation = insulationScore;
         int wantedT = 23;
         int currentT = 18;
         boolean start = precheck(wantedT, currentT);
@@ -67,6 +69,6 @@ public class Testing {
 
     public double getWeeklyGasAmount(double monthlyBudget, double priceOfGasforMon) {
         double weeklyBudget = monthlyBudget / 4;
-
+        return weeklyBudget;
     }
 }
