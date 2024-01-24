@@ -18,10 +18,18 @@ public class House {
     }
 
     public String getHouseLocation() {
+
         System.out.println("what is your postcode? (where the device is being installed): ");
         Scanner scanner = new Scanner(System.in);
-        String enteredLocation = scanner.nextLine();
+        enteredLocation = scanner.nextLine();
+
         return enteredLocation;
+
+        // Scanner scanner = new Scanner(System.in);
+        // String enteredLocation = scanner.nextLine();
+        // if (enteredLocation.length() > 6 || enteredLocation.length() < 5) {
+        // System.out.println("please enter a valid postcode");
+        // }
     }
 
     public int calcInsulationScore(int yearMade) {
@@ -45,6 +53,19 @@ public class House {
         }
 
         return insulationScore;
+    }
+
+    public int getWindowInfo() {
+        System.out.println("how many windows are there ");
+        Scanner scanner = new Scanner(System.in);
+        String windowNum = scanner.nextLine();
+        int windows = 0;
+        try {
+            windows = Integer.valueOf(windowNum);
+        } catch (Exception e) {
+            System.out.println("please enter a valid number (integer) ");
+        }
+        return windows;
     }
 
     public House() {
