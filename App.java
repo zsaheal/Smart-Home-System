@@ -2,18 +2,28 @@ import java.lang.Object;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
         House testerHouse = new House();
         int insulationScore = testerHouse.getInsulationScore();
+        String locationPost = testerHouse.getLocation();
         // Testing Testing1 = new Testing(insulationScore);
 
-        // visual crossing api
-        // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[location]/[date1]/[date2]?key=UUTDGXUEZFXQCMJ79SP9ZAKDD
-        URL url = new URL(
-                "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london%20islington?unitGroup=metric&key=UUTDGXUEZFXQCMJ79SP9ZAKDD&contentType=json");
+        // URL url = new URL(
+        // "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+        // + locationPost
+        // + "?unitGroup=metric&key=UUTDGXUEZFXQCMJ79SP9ZAKDD&contentType=json");
+
+        // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london%20islington/next7days?unitGroup=metric&elements=temp%2Chumidity%2Cwindspeedmean&key=YOUR_API_KEY&contentType=json
+        URL url = new URL("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
+                + locationPost
+                + "/next7days?unitGroup=metric&elements=temp%2Chumidity%2Cwindspeedmean&include=fcst%2Cdays&key=UUTDGXUEZFXQCMJ79SP9ZAKDD&contentType=json");
         HttpURLConnection connecti = (HttpURLConnection) url.openConnection();
         connecti.setRequestMethod("GET");
         connecti.connect();
@@ -31,6 +41,8 @@ public class App {
             }
             scanner.close();
             System.out.println("info: " + gottenInfoString);
+            JSONObject json = (JSONObject) JSONSerializer.toJSON(gottenInfoString);
+            double todaysTemp = json.getDouble("temp");
         }
 
         Testing Testing2 = new Testing(insulationScore);

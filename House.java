@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class House {
     private int yearMade = 0;
     private int insulationScore = 0;
+    private String enteredLocation;
 
     public int getHouseYear() {
         System.out.println("what year was your house built or refurbished (in terms of windows & walls)? ");
@@ -16,8 +17,14 @@ public class House {
         return yearMade;
     }
 
-    public int calcInsulationScore(int yearMade, int insulationScore) {
-        insulationScore = insulationScore;
+    public String getHouseLocation() {
+        System.out.println("what is your postcode? (where the device is being installed): ");
+        Scanner scanner = new Scanner(System.in);
+        String enteredLocation = scanner.nextLine();
+        return enteredLocation;
+    }
+
+    public int calcInsulationScore(int yearMade) {
 
         if (yearMade < 1800) {
             insulationScore = 1;
@@ -42,11 +49,16 @@ public class House {
 
     public House() {
         yearMade = getHouseYear();
-        insulationScore = calcInsulationScore(yearMade, insulationScore);
+        insulationScore = calcInsulationScore(yearMade);
+        enteredLocation = getHouseLocation();
     }
 
     public int getInsulationScore() {
         return insulationScore;
+    }
+
+    public String getLocation() {
+        return enteredLocation;
     }
     // getters
     // setters
