@@ -1,12 +1,14 @@
+
+//import org.json.JSONArray;
+//import org.json.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Scanner;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 public class Weather {
+    public StringBuilder gottenInfoString = new StringBuilder();
+    ArrayList<String> weatherList = new ArrayList<String>();
 
     public String findWeatherF(House aHouse) {
 
@@ -33,7 +35,7 @@ public class Weather {
             if (responseCode != 200) {
                 throw new RuntimeException("code is: " + responseCode);
             } else {
-                StringBuilder gottenInfoString = new StringBuilder();
+                // StringBuilder gottenInfoString = new StringBuilder();
                 Scanner scanner = new Scanner(url.openStream());
 
                 while (scanner.hasNext()) {
@@ -41,9 +43,13 @@ public class Weather {
                 }
                 scanner.close();
                 System.out.println("info: " + gottenInfoString);
-                JSONObject json = (JSONObject) JSONSerializer.toJSON(gottenInfoString);
-                double todaysTemp = json.getDouble("temp");
+                // ;
+                //
+
             }
+            String weatherString = gottenInfoString.toString();
+            System.out.println("needsto be here AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAA: " + weatherString);
+
         } catch (Exception e) {
             // TODO: handle exception
         }

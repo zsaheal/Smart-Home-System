@@ -1,5 +1,11 @@
 import java.util.Scanner;
 
+//import org.json.simple.JSONArray;
+//import org.json.simple.JSONObject;
+//import org.json.simple.parser.JSONParser;
+//import org.json.simple.parser.ParseException;
+//JSONObject json = (JSONObject) JSONSerializer.toJSON(gottenInfoString);
+// double todaysTemp = json.getDouble("temp");
 public class House {
     private int yearMade = 0;
     private int insulationScore = 0;

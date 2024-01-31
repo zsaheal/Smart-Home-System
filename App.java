@@ -9,7 +9,7 @@ public class App {
         House testerHouse = new House();
         int insulationScore = testerHouse.getInsulationScore();
         // String locationPost = testerHouse.getLocation();
-        Weather weather = new Weather(testerHouse);
+        WeatherA weather = new WeatherA(testerHouse);
         // Testing Testing1 = new Testing(insulationScore);
         Testing Testing2 = new Testing(insulationScore);
     }
