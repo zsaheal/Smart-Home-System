@@ -1,31 +1,19 @@
-
-//import org.json.JSONArray;
-//import org.json.JSONObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Weather {
-    public StringBuilder gottenInfoString = new StringBuilder();
-    ArrayList<String> weatherList = new ArrayList<String>();
+    ArrayList<Double> temperatureList = new ArrayList<>();
 
-    public String findWeatherF(House aHouse) {
-
-        String locationPost = aHouse.getLocation();
-        String voidthing = "empty";
-        // Testing Testing1 = new Testing(insulationScore);
-
-        // URL url = new URL(
-        // "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
-        // + locationPost
-        // + "?unitGroup=metric&key=UUTDGXUEZFXQCMJ79SP9ZAKDD&contentType=json");
-
-        // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london%20islington/next7days?unitGroup=metric&elements=temp%2Chumidity%2Cwindspeedmean&key=YOUR_API_KEY&contentType=json
+    public ArrayList<Double> findWeatherF(House aHouse) {
         try {
             URL url = new URL("https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/"
-                    + locationPost
+                    + aHouse.getLocation()
                     + "/next7days?unitGroup=metric&elements=temp%2Chumidity%2Cwindspeedmean&include=fcst%2Cdays&key=UUTDGXUEZFXQCMJ79SP9ZAKDD&contentType=json");
+
             HttpURLConnection connecti = (HttpURLConnection) url.openConnection();
             connecti.setRequestMethod("GET");
             connecti.connect();
@@ -35,34 +23,38 @@ public class Weather {
             if (responseCode != 200) {
                 throw new RuntimeException("code is: " + responseCode);
             } else {
-                // StringBuilder gottenInfoString = new StringBuilder();
                 Scanner scanner = new Scanner(url.openStream());
 
+                StringBuilder gottenInfoString = new StringBuilder();
                 while (scanner.hasNext()) {
                     gottenInfoString.append(scanner.nextLine());
                 }
                 scanner.close();
-                System.out.println("info: " + gottenInfoString);
-                // ;
-                //
 
+                JSONObject jsonObject = new JSONObject(gottenInfoString.toString());
+                JSONArray daysArray = jsonObject.getJSONArray("days");
+
+                for (int i = 0; i < daysArray.length(); i++) {
+                    JSONObject dayObject = daysArray.getJSONObject(i);
+                    double temperature = dayObject.getDouble("temp");
+                    temperatureList.add(temperature);
+                }
             }
-            String weatherString = gottenInfoString.toString();
-            System.out.println("needsto be here AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHAA: " + weatherString);
-
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
-
-        // take input from weather api and return weahher for the day
-        return voidthing;
-    }
-
-    public int getDayWeather() {
-        return 0;
+        return temperatureList;
     }
 
     public Weather(House aHouse) {
-        String weaterforecast = findWeatherF(aHouse);
+        ArrayList<Double> temperatureForecast = findWeatherF(aHouse);
+        for (int i = 0; i < temperatureForecast.size(); i++) {
+            System.out.println("Day " + (i + 1) + " Temperature: " + temperatureForecast.get(i));
+        }
+    }
+
+    public ArrayList<Double> returnForecast(House aHouse) {
+        ArrayList<Double> temperatureForecast = findWeatherF(aHouse);
+        return temperatureForecast;
     }
 }

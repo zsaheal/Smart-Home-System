@@ -7,18 +7,24 @@ public class Testing {
     public static double budgetPerMonth = 10;
     public double priceOfGasforMon = 2;
     public int houseInsulation = 0;
+    House h1 = new House();
+    Weather w1 = new Weather(h1);
 
     public Testing(int insulationScore) {
         houseInsulation = insulationScore;
         int wantedT = 23;
-        int currentT = 18;
-        boolean start = precheck(wantedT, currentT);
-        int missing = missingTemp(wantedT, currentT, start);
+        Heating heat = new Heating(w1, h1);
+        Double adjustedTemp = heat.adjustCalcF(); // adjusted daily temp depending on weather
+        System.out.println(
+                "hfjhfdjhbvfdhbvfdhjb    omg its c=gonna be this cold this week at home  EEE: " + adjustedTemp);
+        // int currentT = 18;
+        boolean start = precheck(wantedT, adjustedTemp);
+        Double missing = missingTemp(wantedT, adjustedTemp, start);
         double hoursNeeded = calculations(missing);
         enoughMoney(budgetPerMonth, hoursNeeded, priceOfGasforMon);
     }
 
-    public boolean precheck(int wantedT, int currentT) {
+    public boolean precheck(int wantedT, Double currentT) {
         boolean goahead = false;
         if (wantedT > currentT) {
             goahead = true;
@@ -29,16 +35,16 @@ public class Testing {
         }
     }
 
-    public int missingTemp(int wantedT, int currentT, boolean yes) {
+    public Double missingTemp(int wantedT, Double currentT, boolean yes) {
         if (yes == true) {
-            int missing = wantedT - currentT;
+            Double missing = wantedT - currentT;
             return missing;
         } else {
-            return 0;
+            return 0.0;
         }
     }
 
-    public double calculations(int missing) {
+    public double calculations(Double missing) {
         if (missing == 0) {
             System.out.println("Temp is hot enough (no heating needed)");
             return 0;
