@@ -7,16 +7,19 @@ public class Testing {
     public static double budgetPerMonth = 10;
     public double priceOfGasforMon = 2;
     public int houseInsulation = 0;
-    House h1 = new House();
-    Weather w1 = new Weather(h1);
+    // House h1;
+    Weather w1;
+    Heating heat;
 
-    public Testing(int insulationScore) {
+    public Testing(int insulationScore, Heating heat, Weather weather) {
         houseInsulation = insulationScore;
+        heat = heat;
+        // h1 = myHouse;
+        w1 = weather;
         int wantedT = 23;
-        Heating heat = new Heating(w1, h1);
         Double adjustedTemp = heat.adjustCalcF(); // adjusted daily temp depending on weather
         System.out.println(
-                "hfjhfdjhbvfdhbvfdhjb    omg its c=gonna be this cold this week at home  EEE: " + adjustedTemp);
+                "hfjhfdjhbvfdhbvfdhjb omg its c=gonna be this cold this week at home  EEE: " + adjustedTemp);
         // int currentT = 18;
         boolean start = precheck(wantedT, adjustedTemp);
         Double missing = missingTemp(wantedT, adjustedTemp, start);

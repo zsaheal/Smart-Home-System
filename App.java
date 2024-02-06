@@ -4,6 +4,8 @@ import java.net.URL;
 import java.util.Scanner;
 
 public class App {
+    public static Double currentTemp = 16.0;
+
     public static void main(String[] args) throws Exception {
 
         House testerHouse = new House();
@@ -12,9 +14,10 @@ public class App {
 
         // herere
         Weather weather = new Weather(testerHouse);
-        Heating heating = new Heating(weather, testerHouse);
+        Heating heating = new Heating(weather, testerHouse, currentTemp);
 
         // Testing Testing1 = new Testing(insulationScore);
-        Testing Testing2 = new Testing(insulationScore);
+        Testing Testing = new Testing(insulationScore, heating, weather);
+        DailyTemp dt = new DailyTemp(insulationScore, weather, heating);
     }
 }
