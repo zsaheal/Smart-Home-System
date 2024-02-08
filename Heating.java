@@ -22,8 +22,10 @@ public class Heating {
 
     public Double adjustCalcF() {
         Double dailyTemp = basicTemp;
+        ArrayList<Double> adjustedList = new ArrayList<>();
         for (int i = 0; i < sevenDays.size(); i++) {
-            System.out.println("here once: " + sevenDays.size() + " first val" + sevenDays.get(i));
+            // System.out.println("here once: " + sevenDays.size() + " first val " +
+            // sevenDays.get(i));
             if (sevenDays.get(i) < basicTemp) {
                 dailyTemp = basicTemp - sevenDays.get(i) / 3;
             } else if (sevenDays.get(i) == basicTemp) {
@@ -31,8 +33,8 @@ public class Heating {
             } else {
                 dailyTemp = basicTemp + sevenDays.get(i) / 3;
             }
-            System.out.println("dainly temp tommororw: " + dailyTemp);
-            return dailyTemp;
+            adjustedList.add(dailyTemp);
+            // System.out.println("dainly temp tommororw: " + dailyTemp);
         }
         return dailyTemp;
     }
