@@ -34,8 +34,26 @@ public class Heating {
                 dailyTemp = basicTemp + sevenDays.get(i) / 3;
             }
             adjustedList.add(dailyTemp);
-            // System.out.println("dainly temp tommororw: " + dailyTemp);
+            System.out.println("tommororw: " + dailyTemp);
         }
         return dailyTemp;
+    }
+
+    public ArrayList<Double> adjustedlistget() {
+        Double dailyTemp = basicTemp;
+        ArrayList<Double> adjustedList = new ArrayList<>();
+        for (int i = 0; i < sevenDays.size(); i++) {
+            // System.out.println("here once: " + sevenDays.size() + " first val " +
+            // sevenDays.get(i));
+            if (sevenDays.get(i) < basicTemp) {
+                dailyTemp = basicTemp - sevenDays.get(i) / 3;
+            } else if (sevenDays.get(i) == basicTemp) {
+                dailyTemp = basicTemp;
+            } else {
+                dailyTemp = basicTemp + sevenDays.get(i) / 3;
+            }
+            adjustedList.add(dailyTemp);
+        }
+        return adjustedList;
     }
 }
