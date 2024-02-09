@@ -34,7 +34,7 @@ public class Heating {
                 dailyTemp = basicTemp + sevenDays.get(i) / 3;
             }
             adjustedList.add(dailyTemp);
-            System.out.println("tommororw: " + dailyTemp);
+            // System.out.println("tommororw: " + dailyTemp);
         }
         return dailyTemp;
     }

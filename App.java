@@ -12,12 +12,10 @@ public class App {
         int insulationScore = testerHouse.getInsulationScore();
         // String locationPost = testerHouse.getLocation();
 
-        // herere
         Weather weather = new Weather(testerHouse);
         Heating heating = new Heating(weather, testerHouse, currentTemp);
 
-        // Testing Testing1 = new Testing(insulationScore);
-        Testing Testing = new Testing(insulationScore, heating, weather);
+        // Testing Testing = new Testing(insulationScore, heating, weather);
         DailyTemp dt = new DailyTemp(insulationScore, weather, heating);
     }
 }

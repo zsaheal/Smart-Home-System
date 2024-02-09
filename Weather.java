@@ -49,7 +49,7 @@ public class Weather {
     public Weather(House aHouse) {
         ArrayList<Double> temperatureForecast = findWeatherF(aHouse);
         for (int i = 0; i < temperatureForecast.size(); i++) {
-            System.out.println("Day " + (i + 1) + " Temperature: " + temperatureForecast.get(i));
+            System.out.println("Day " + (i + 1) + " forecasted temperature: " + temperatureForecast.get(i));
         }
     }
 
