@@ -39,12 +39,13 @@ public class Heating {
         return dailyTemp;
     }
 
+    // this calulations need to change and include insulation score
+    // check house insulation, then outisde vs sindoor temp and adjust how it will
+    // adjust
     public ArrayList<Double> adjustedlistget() {
         Double dailyTemp = basicTemp;
         ArrayList<Double> adjustedList = new ArrayList<>();
         for (int i = 0; i < sevenDays.size(); i++) {
-            // System.out.println("here once: " + sevenDays.size() + " first val " +
-            // sevenDays.get(i));
             if (sevenDays.get(i) < basicTemp) {
                 dailyTemp = basicTemp - sevenDays.get(i) / 3;
             } else if (sevenDays.get(i) == basicTemp) {

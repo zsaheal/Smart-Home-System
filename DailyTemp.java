@@ -13,7 +13,12 @@ public class DailyTemp {
 
     boolean yesor = false;
     double missingT = 0.0;
+    double monthlyBudget = 70;
 
+    ///
+    /// add budeting how much price ect
+    ///
+    ///
     public DailyTemp(int insulationScore, Weather weather, Heating heat) {
         houseInsulation = insulationScore;
         w1 = weather;
@@ -58,5 +63,10 @@ public class DailyTemp {
             double total = mutipliedforty + 1;
             return total;
         }
+    }
+
+    public double budgetEnoughForWeek() {
+        double weeklyBudget = monthlyBudget / 4;
+        return weeklyBudget;
     }
 }
